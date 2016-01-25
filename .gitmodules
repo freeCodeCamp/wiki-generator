@@ -1,0 +1,6 @@
+[submodule "wiki-master"]
+	path = wiki-master
+	url = git@github.com:FreeCodeCamp/wiki.git
+[submodule "wiki-gh-pages"]
+	path = wiki-gh-pages
+	url = git@github.com:FreeCodeCamp/wiki.git
