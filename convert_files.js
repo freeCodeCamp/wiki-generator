@@ -13,10 +13,10 @@ JSON Array/Object
 
 var fs = require('fs');
 var incomingLink = /github\.com\/freecodecamp\/freecodecamp\/wiki/gi;
-var outgoingLink = 'freecodecamp.com/wiki/docs';
+var outgoingLink = 'freecodecamp.com/wiki';
 
 // Get File list
-fs.readdir('./pages/docs/', function(err, folders) {
+fs.readdir('./pages/', function(err, folders) {
   if(err) throw err;
   var fileList = folders.filter(function(folder) {
     // Remove stupid hidden folders
@@ -31,12 +31,13 @@ fs.readdir('./pages/docs/', function(err, folders) {
   fileList.forEach(function(fileobj) {
     // Create directory
 
-    var newFileName = './pages/docs/'+fileobj.filename;
+    var newFileName = './pages/'+fileobj.filename;
 
     var data = fs.readFileSync(newFileName, 'utf-8'); //read existing contents into data
     var fd = fs.openSync(newFileName, 'w+');
 
-    data = data.replace(incomingLink, outgoingLink);
+    data = data.replace(incomingLink, outgoingLink)
+               .replace(/\.\/images/gi,'../images');  // Update image links to be relative
     var newData = new Buffer(data);
 
     var header = '---\ntitle: ' + fileobj.title + '\norder: 5\n---\n';

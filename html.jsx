@@ -6,7 +6,7 @@ import typography from './utils/typography';
 const { TypographyStyle } = typography;
 
 module.exports = React.createClass({
-  getDefaultProps: function() {
+  DefaultProps: function() {
     return {
       body: ""
     };
@@ -31,10 +31,10 @@ module.exports = React.createClass({
           <style dangerouslySetInnerHTML={{__html:
             `
               a {
-                color: #884499;
+                color: #006400;
               }
               pre {
-                background: whitesmoke;
+                background: #fff;
                 padding: 1.5rem;
               }
               .demo1-ball {
@@ -47,22 +47,22 @@ module.exports = React.createClass({
                 background-size: 50px;
               }
               .ball-0 {
-                background-image: url(${link("/docs/some-react-code/0.jpg")});
+                background-image: url(${link("/some-react-code/0.jpg")});
               }
               .ball-1 {
-                background-image: url(${link("/docs/some-react-code/1.jpg")});
+                background-image: url(${link("/some-react-code/1.jpg")});
               }
               .ball-2 {
-                background-image: url(${link("/docs/some-react-code/2.jpg")});
+                background-image: url(${link("/some-react-code/2.jpg")});
               }
               .ball-3 {
-                background-image: url(${link("/docs/some-react-code/3.jpg")});
+                background-image: url(${link("/some-react-code/3.jpg")});
               }
               .ball-4 {
-                background-image: url(${link("/docs/some-react-code/4.jpg")});
+                background-image: url(${link("/some-react-code/4.jpg")});
               }
               .ball-5 {
-                background-image: url(${link("/docs/some-react-code/5.jpg")});
+                background-image: url(${link("/some-react-code/5.jpg")});
               }
             `
           }} />

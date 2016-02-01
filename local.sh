@@ -36,16 +36,5 @@ cp public/bundle.js wiki-gh-pages/
 cp public/index.html wiki-gh-pages/
 cp public/bundle.js.map wiki-gh-pages/
 
-# Update gh-pages branch with new files
-cd wiki-gh-pages/
-git pull origin gh-pages
-git add .
-git commit -m "Page built on `date +"%d-%m-%Y %T"`"
-
-# Push gh-pages live
-git push origin gh-pages
-
-# Push regular wiki live
-cd ../wiki-master
-#git push live master
-cd ..
+# Get to work, baby!
+gatsby develop 
