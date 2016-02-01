@@ -6,7 +6,7 @@ import typography from './utils/typography';
 const { TypographyStyle } = typography;
 
 module.exports = React.createClass({
-  getDefaultProps: function() {
+  DefaultProps: function() {
     return {
       body: ""
     };
@@ -31,10 +31,10 @@ module.exports = React.createClass({
           <style dangerouslySetInnerHTML={{__html:
             `
               a {
-                color: #884499;
+                color: #006400;
               }
               pre {
-                background: whitesmoke;
+                background: #fff;
                 padding: 1.5rem;
               }
               .demo1-ball {
