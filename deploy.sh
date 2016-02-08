@@ -28,18 +28,18 @@ node convert_files.js
 # Build Output
 gatsby build --prefix-links
 
+# TODO:  Clear out existing folders before copy
+
 # Copy generated output to gh-pages on live wiki
 cp -r wiki-master/images/* wiki-gh-pages/images/
+# TODO:  Copy language images folders
 cp -r public/* wiki-gh-pages/
 cp css/* wiki-gh-pages/css/
-cp public/bundle.js wiki-gh-pages/
-cp public/index.html wiki-gh-pages/
-cp public/bundle.js.map wiki-gh-pages/
 
 # Update gh-pages branch with new files
 cd wiki-gh-pages/
 git pull origin gh-pages
-git add .
+git add -A
 git commit -m "Page built on `date +"%d-%m-%Y %T"`"
 
 # Push gh-pages live
