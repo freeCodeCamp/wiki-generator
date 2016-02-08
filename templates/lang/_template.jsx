@@ -37,12 +37,16 @@ module.exports = React.createClass({
 
   render: function() {
     var childPages, docOptions, docPages;
+    var langRegex = new RegExp( '^/' + __filename.slice(0,2));
+    console.log(langRegex.toString());
     childPages = templateChildrenPages(__filename, this.props.state).map(function(child) {
       return {
         title: child.data.title,
         order: child.data.order,
         path: child.path
       };
+    }).filter(child => {
+      return langRegex.test(child.path);
     });
     childPages = sortBy(childPages, function(child) {
       return child.order;
@@ -98,9 +102,39 @@ module.exports = React.createClass({
             </span>  
           </a>
         </div>
+        <Breakpoint minWidth={700}>
+          <div className="wikiAside">
+            <div className='searchBar'>
+              <input 
+                type='text' 
+                value ={this.props.filterText}
+                ref="filterTextInput"
+                onChange={this.handleSearchChange}
+                placeholder='Article search' 
+                /></div>
+            <div className='articlesList'>
+              <ul>
+              {docPages}
+              </ul>
+            </div>
+          </div>
+          <div className='articleContent'>
+            <RouteHandler typography={typography} {...this.props}/>
+          </div>
+        </Breakpoint>
+        <Breakpoint maxWidth={700}>
+          <div className='wikiSelector'>
+            <select
+              defaultValue={this.props.state.path}
+                onChange={this.handleTopicChange}
+                >
+              {docOptions}
+            </select>
+          </div>
           <div className='articleContent'>
             <RouteHandler typography={typography} {...this.props}/>
           </div>  
+        </Breakpoint>
       </div>
     );
   }
