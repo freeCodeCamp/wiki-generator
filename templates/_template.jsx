@@ -18,89 +18,12 @@ const { rhythm, fontSizeToPx } = typography;
 
 module.exports = React.createClass({
   mixins: [State, Navigation],
-  
-  getInitialState: function() {
-      return {
-          filterText: ''
-      };
-  },
-
-  handleTopicChange: function(e) {
-    return this.transitionTo(e.target.value);
-  },
- 
-  handleSearchChange: function(e) {
-      this.setState({ 
-          filterText: this.refs.filterTextInput.value
-      });
-  },
-
   render: function() {
-    var childPages, docOptions, docPages;
-    childPages = templateChildrenPages(__filename, this.props.state).map(function(child) {
-      return {
-        title: child.data.title,
-        order: child.data.order,
-        path: child.path
-      };
-    });
-    childPages = sortBy(childPages, function(child) {
-      return child.order;
-    });
-    docOptions = childPages.map(function(child) {
-      return React.createElement("option", {
-        "key": child.path,
-        "value": child.path
-      }, child.title);
-    });
-    docPages = childPages
-
-        .filter(function(child) {
-            if(this.state.filterText.length > 0) {
-                let regex = new RegExp(this.state.filterText,'i');
-                return regex.test(child.title);
-            } else {
-                return true;
-            }            
-        },this)
-        .map((function(_this) {
-      
-      return function(child) {
-        var isActive;
-        isActive = _this.isActive(link(child.path));
-        return (
-          <li
-            key={child.path}
-            style={{
-              marginBottom: rhythm(1/2)
-            }}
-          >
-            <Link
-              to={link(child.path)}
-            >
-              {isActive ? <strong>{child.title}</strong> : child.title }
-            </Link>
-          </li>
-        )
-      };
-    })(this));
-
     return (
-      <div className='container'>
-        <div className='wiki-header'>
-          <a href='http://www.freecodecamp.com' 
-            >
-            <img
-              src="http://i.imgur.com/L5o713v.png" 
-              />
-            <span>
-              Return to the main site
-            </span>  
-          </a>
-        </div>
-          <div className='articleContent'>
-            <RouteHandler typography={typography} {...this.props}/>
-          </div>  
+      <div className='wiki-container'>
+        <div className='article-container'>
+          <RouteHandler typography={typography} {...this.props}/>
+        </div>  
       </div>
     );
   }

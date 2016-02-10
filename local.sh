@@ -32,9 +32,6 @@ gatsby build --prefix-links
 cp -r wiki-master/images/* wiki-gh-pages/images/
 cp -r public/* wiki-gh-pages/
 cp css/* wiki-gh-pages/css/
-cp public/bundle.js wiki-gh-pages/
-cp public/index.html wiki-gh-pages/
-cp public/bundle.js.map wiki-gh-pages/
 
 # Get to work, baby!
 gatsby develop 

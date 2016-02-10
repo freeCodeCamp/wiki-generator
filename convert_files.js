@@ -43,10 +43,17 @@ langFolders.filter(langFolder => {
       // Update Links
       data = data.replace(incomingLink, outgoingLink)
         .replace(/\.\/images/gi, '../images');  // Update image links to be relative
+       
+      // Dirty hack to remove the first line of home 
+      if(fileObj.isHome) {
+        data = data.replace(/^#[^\n]+\n/,'');
+      }
+      
       var newData = new Buffer(data);
 
       // Make the "Home" file display at the top
       var order = (fileObj.isHome) ? 0 : 5;
+      
 
       // Create Header
       var header = `---\ntitle: ${fileObj.title}\norder: ${order}\n---\n`;

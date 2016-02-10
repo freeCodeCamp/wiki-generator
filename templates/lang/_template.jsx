@@ -37,8 +37,7 @@ module.exports = React.createClass({
 
   render: function() {
     var childPages, docOptions, docPages;
-    var langRegex = new RegExp( '^/' + __filename.slice(0,2));
-    console.log(langRegex.toString());
+    var langRegex = new RegExp( '^/' + __filename.slice(0,2))
     childPages = templateChildrenPages(__filename, this.props.state).map(function(child) {
       return {
         title: child.data.title,
@@ -58,7 +57,6 @@ module.exports = React.createClass({
       }, child.title);
     });
     docPages = childPages
-
         .filter(function(child) {
             if(this.state.filterText.length > 0) {
                 let regex = new RegExp(this.state.filterText,'i');
@@ -90,18 +88,7 @@ module.exports = React.createClass({
     })(this));
 
     return (
-      <div className='container'>
-        <div className='wiki-header'>
-          <a href='http://www.freecodecamp.com' 
-            >
-            <img
-              src="http://i.imgur.com/L5o713v.png" 
-              />
-            <span>
-              Return to the main site
-            </span>  
-          </a>
-        </div>
+      <div>
         <Breakpoint minWidth={700}>
           <div className="wikiAside">
             <div className='searchBar'>
