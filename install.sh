@@ -15,3 +15,10 @@ git checkout gh-pages
 echo "gh-pages checked out"
 
 cd ..
+
+chmod 744 *.sh
+echo "permissions set"
+
+echo "Installing NPM modules"
+npm install
+echo "installation process finished, please check for possible errors or warnings"
