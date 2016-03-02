@@ -1,12 +1,10 @@
 import React from 'react';
-import { RouteHandler, Link, State, Navigation } from 'react-router';
+import { Link, State, Navigation } from 'react-router';
 import { Container, Grid, Breakpoint, Span } from 'react-responsive-grid';
 import Typography from 'typography';
-import sortBy from 'lodash/collection/sortBy';
 import colorPairsPicker from 'color-pairs-picker';
 import chroma from 'chroma-js';
 import includes from 'underscore.string/include';
-import { link, templateChildrenPages } from 'gatsby-helpers';
 
 import typography from 'utils/typography';
 
@@ -22,7 +20,7 @@ module.exports = React.createClass({
     return (
       <div className='wiki-container'>
         <div className='article-container'>
-          <RouteHandler typography={typography} {...this.props}/>
+          {this.props.children}
         </div>  
       </div>
     );

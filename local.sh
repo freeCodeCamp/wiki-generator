@@ -22,7 +22,9 @@ git pull origin master
 cd ..
 
 # Copy and Transform .md files from wiki repo
+echo "Creating Structure"
 node create_structure.js
+echo "Converting Files"
 node convert_files.js
 
 # Build Output

@@ -21,6 +21,9 @@ var languageFolders = [
   }
 ];
 
+// List of supported lanugages
+var langList = [ 'en/' ];
+
 // Get File list
 fs.readdir('./wiki-master', function (err, files) {
   if (err) throw err;
@@ -52,6 +55,9 @@ fs.readdir('./wiki-master', function (err, files) {
   var extra = folderList.reduce((thisList, langSubFolder) => {
     var langDir = langSubFolder.match(/^\w{2}/)[0] + '/',
       langFiles = fs.readdirSync('./wiki-master/' + langSubFolder);
+    
+    // Add this directory to the list of languages
+    langList.push(langDir);
 
     // Setup copies for later
     languageFolders.push({
@@ -83,7 +89,7 @@ fs.readdir('./wiki-master', function (err, files) {
       })
     );
   }, []);
-
+  
   // Create folders and copy *.md files
   createFolders(fileList);
 
@@ -95,6 +101,24 @@ fs.readdir('./wiki-master', function (err, files) {
   } catch (err) {
     throw err;
   }
+
+  // Generate _pages.yaml for each language
+  langList.forEach( lang => {
+    var langDir = './pages/' + lang;
+
+    var output = fs.readdirSync(langDir).filter(file => {
+        return fs.statSync(langDir + file).isDirectory() && !/^images$/.test(file);
+      })
+      .reduce((acc, dir) => {
+        return acc + `- "/${lang + dir}/"\n`;
+      }, "");
+    
+    try {
+      fs.outputFileSync(langDir + '_pages.yaml', output);
+    } catch(err) {
+      throw err;
+    }
+  });
 });
 
 // Create a folder base
