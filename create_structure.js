@@ -21,7 +21,7 @@ var languageFolders = [
   }
 ];
 
-// List of supported lanugages
+// List of supported languages
 var langList = [ 'en/' ];
 
 // Get File list

@@ -1,11 +1,24 @@
 body,html {
   overflow:hidden;
 }
+#react-mount {
+  position: absolute;
+  display: block;
+  height: 100%;
+  width: 100%; 
+}
 .wiki-container {
   max-width:960px;
   padding:80px 30px 0;
+  box-sizing: border-box;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
   margin:0 auto;
   position:relative;
+  overflow-x: hidden; 
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 a{
   text-decoration: none;
