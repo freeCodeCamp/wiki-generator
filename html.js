@@ -6,17 +6,20 @@ import typography from './utils/typography';
 const { TypographyStyle } = typography;
 
 module.exports = React.createClass({
-  DefaultProps: function() {
+ propTypes () {
     return {
-      body: ""
-    };
+      title: React.PropTypes.string,
+    }
   },
-
-  render: function() {
-    var title
-    title = DocumentTitle.rewind();
+  render () {
+    let title = DocumentTitle.rewind()
     if (this.props.title) {
-      title = this.props.title;
+      title = this.props.title
+    }
+    
+    let cssLink
+    if (process.env.NODE_ENV === 'production') {
+      cssLink = <link rel="stylesheet" href={link('/styles.css')} />
     }
 
     return (
