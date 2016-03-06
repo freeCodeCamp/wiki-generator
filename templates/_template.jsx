@@ -1,10 +1,8 @@
 import React from 'react';
 import { Link, State, Navigation } from 'react-router';
-import { Container, Grid, Breakpoint, Span } from 'react-responsive-grid';
-import colorPairsPicker from 'color-pairs-picker';
-import chroma from 'chroma-js';
+import { Breakpoint } from 'react-responsive-grid';
 import includes from 'underscore.string/include';
-import { link, templateChildrenPages } from 'gatsby-helpers';
+import { link } from 'gatsby-helpers';
 
 // Style code
 import 'css/github.css';

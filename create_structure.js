@@ -52,7 +52,7 @@ fs.readdir('./wiki-master', function (err, files) {
   });
 
   // Get non-english files
-  var extra = folderList.reduce((thisList, langSubFolder) => {
+  var nonEnglishFileList = folderList.reduce((thisList, langSubFolder) => {
     var langDir = langSubFolder.match(/^\w{2}/)[0] + '/',
       langFiles = fs.readdirSync('./wiki-master/' + langSubFolder);
     
@@ -92,6 +92,7 @@ fs.readdir('./wiki-master', function (err, files) {
   
   // Create folders and copy *.md files
   createFolders(fileList);
+  createFolders(nonEnglishFileList);
 
   // Copy language templates and templates files to each language
   try {

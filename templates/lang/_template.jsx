@@ -1,11 +1,9 @@
 import React from 'react';
 import { Link, State, Navigation } from 'react-router';
-import { Container, Grid, Breakpoint, Span } from 'react-responsive-grid';
+import { Breakpoint } from 'react-responsive-grid';
 import find from 'lodash/find';
 import { link } from 'gatsby-helpers';
 import pageList from './_pages.yaml';
-
-import typography from 'utils/typography';
 
 // Style code
 import 'css/github.css';
@@ -42,7 +40,7 @@ module.exports = React.createClass({
         order: page.data.order,
         path: page.path,
       }
-    }).sort((a,b) => { return a.order - b.order });
+    }).sort((a,b) => a.title.localeCompare(b.title));
     const docOptions = childPages.map((child) =>
       <option
         key={link(child.path)}
@@ -66,15 +64,9 @@ module.exports = React.createClass({
       return (
         <li
           key={child.path}
-          style={{
-            marginBottom: rhythm(1/2),
-          }}
         >
           <Link
             to={link(child.path)}
-            style={{
-              textDecoration: 'none',
-            }}
           >
             {isActive ? <strong>{child.title}</strong> : child.title }
           </Link>
