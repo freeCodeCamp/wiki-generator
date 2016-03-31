@@ -2,7 +2,6 @@ import React from 'react';
 import { Link, State, Navigation } from 'react-router';
 import { Breakpoint } from 'react-responsive-grid';
 import includes from 'underscore.string/include';
-import { link } from 'gatsby-helpers';
 
 // Style code
 import 'css/github.css';
@@ -14,7 +13,7 @@ module.exports = React.createClass({
       <div className='wiki-container'>
         <div className='article-container'>
           {this.props.children}
-        </div>  
+        </div>
       </div>
     );
   }

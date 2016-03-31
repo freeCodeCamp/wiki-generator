@@ -24,8 +24,6 @@ cd ..
 # Copy and Transform .md files from wiki repo
 echo "Creating Structure"
 node create_structure.js
-echo "Converting Files"
-node convert_files.js
 
 # Build Output
 gatsby build --prefix-links
@@ -36,4 +34,4 @@ cp -r public/* wiki-gh-pages/
 cp css/* wiki-gh-pages/css/
 
 # Get to work, baby!
-gatsby develop 
+gatsby develop
