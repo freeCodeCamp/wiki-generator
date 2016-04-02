@@ -10,14 +10,14 @@ import 'css/gatsby.css';
 module.exports = React.createClass({
   componentDidMount() {
     // if iframe, this will be the parent url
-    const originUrl = typeof document !== 'undefined' ?
-      document.referrer :
+    const win = typeof window !== 'undefined' ?
+      window :
       false;
+    const originUrl = win ?  win.document.referrer : false;
     // grab parent DOM object to post messages
-    const parent = typeof window !== 'undefined' ?
-      window.parent :
-      false;
-    if (!parent && !originUrl) {
+    const parent = win ?  win.parent : false;
+    // check if we are in an iframe
+    if (win.top === win.self) {
       return;
     }
     // listen to react-router history changes
