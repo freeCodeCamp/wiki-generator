@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "./node_modules/.bin/eslint --ext .js,.jsx --ignore-pattern public .",
     "start": "gatsby develop",
-    "build": "npm run initepages && rm -rf public && NODE_ENV='production' gatsby build --prefix-links && npm run copy-assets",
+    "build": "npm run init-pages && rm -rf public && NODE_ENV=production gatsby build --prefix-links && npm run copy-assets",
     "init-pages": "mkdir -p pages/ && rm -rf ./pages/* && node create_structure",
     "copy-assets": "rm -r wiki-gh-pages/* && mkdir wiki-gh-pages/images/ && cp -r wiki-master/images/* wiki-gh-pages/images; cp -r public/* wiki-gh-pages/"
   },
