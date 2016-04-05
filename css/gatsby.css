@@ -16,7 +16,7 @@ body,html {
   height: 100%;
   margin:0 auto;
   position:relative;
-  overflow-x: hidden; 
+  overflow-x: hidden;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 }
@@ -48,20 +48,18 @@ a:hover {
 .wiki-header span {
   position:absolute;
 }
-.article-container {
-}
-.articleContent {
+.article-content {
   width:95%;
   margin:40px auto 0;
 }
-.wikiSelector {
+.wiki-selector {
   position:fixed;
   top:50px;
 }
-.wikiSelector select {
+.wiki-selector select {
   width:95%;
 }
-.wikiAside {
+.wiki-aside {
   width: 250px;
   border-left: 1px solid lightgrey;
   float:right;
@@ -80,6 +78,9 @@ a:hover {
 }
 
 @media (max-width:700px) {
+  .wiki-aside {
+    display: none;
+  }
   .wiki-header, .wiki-selector {
     text-align:center;
   }
@@ -90,6 +91,9 @@ a:hover {
   }
 }
 @media (min-width:701px) {
+  .wiki-selector {
+    display: none;
+  }
   .wiki-header span {
     margin-left:10px;
     top:40px;

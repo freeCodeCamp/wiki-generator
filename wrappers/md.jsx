@@ -3,6 +3,7 @@ import DocumentTitle from 'react-document-title'
 import { config } from 'config'
 
 module.exports = React.createClass({
+  displayName: 'Post',
   propTypes () {
     return {
       route: React.PropTypes.object,
@@ -10,7 +11,6 @@ module.exports = React.createClass({
   },
   render () {
     const post = this.props.route.page.data
-
     return (
       <DocumentTitle title={`${post.title} | ${config.siteTitle}`}>
         <div className="markdown">

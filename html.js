@@ -1,10 +1,11 @@
 import React from 'react';
 import DocumentTitle from 'react-document-title';
 
-import { link } from 'gatsby-helpers';
+import { prefixLink } from 'gatsby-helpers';
 
 module.exports = React.createClass({
- propTypes () {
+  displayName: 'HTML',
+  propTypes () {
     return {
       title: React.PropTypes.string,
     }
@@ -13,11 +14,6 @@ module.exports = React.createClass({
     let title = DocumentTitle.rewind()
     if (this.props.title) {
       title = this.props.title
-    }
-    
-    let cssLink
-    if (process.env.NODE_ENV === 'production') {
-      cssLink = <link rel="stylesheet" href={link('/styles.css')} />
     }
 
     return (
@@ -28,10 +24,11 @@ module.exports = React.createClass({
           <meta name='viewport' content='user-scalable=no width=device-width, initial-scale=1.0 maximum-scale=1.0'/>
           <title>{title}</title>
           <link rel="shortcut icon" href={this.props.favicon}/>
+          <link rel="stylesheet" href={prefixLink('/styles.css')} />
         </head>
         <body className="landing-page">
           <div id="react-mount" dangerouslySetInnerHTML={{__html: this.props.body}} />
-          <script src={link("/bundle.js")}/>
+          <script src={prefixLink("/bundle.js")}/>
         </body>
       </html>
     );
