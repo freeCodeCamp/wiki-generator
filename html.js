@@ -24,6 +24,7 @@ module.exports = React.createClass({
           <meta name='viewport' content='user-scalable=no width=device-width, initial-scale=1.0 maximum-scale=1.0'/>
           <title>{title}</title>
           <link rel="shortcut icon" href={this.props.favicon}/>
+          <link rel='stylesheet' href='http://fonts.useso.com/css?family=Raleway' />
           <link rel="stylesheet" href={prefixLink('/styles.css')} />
         </head>
         <body className="landing-page">
