@@ -2,6 +2,7 @@ body,html {
   overflow:hidden;
 }
 #react-mount {
+  font-family: 'Lato', sans-serif;
   position: absolute;
   display: block;
   height: 100%;
