@@ -5,3 +5,4 @@ wiki-master/*
 pages/*
 docs/*
 .idea/
+*.log

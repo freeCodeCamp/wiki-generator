@@ -1,6 +1,6 @@
 {
   "name": "wiki-generator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Wiki Pages Generator for Free Code Camp",
   "main": "n/a",
   "scripts": {
@@ -8,7 +8,7 @@
     "lint": "./node_modules/.bin/eslint --ext .js,.jsx --ignore-pattern public .",
     "start": "gatsby develop",
     "build": "npm run init-pages && rm -rf public && NODE_ENV=production gatsby build --prefix-links && npm run copy-assets",
-    "init-pages": "mkdir -p pages/ && rm -rf ./pages/* && node create_structure",
+    "init-pages": "git submodule init && git submodule update --remote && cd wiki-master && git checkout master && cd ../wiki-gh-pages && git checkout gh-pages && cd .. && chmod 744 *.sh && mkdir -p pages/ && rm -rf ./pages/* && node create_structure",
     "copy-assets": "rm -r wiki-gh-pages/* && mkdir wiki-gh-pages/images/ && cp -r wiki-master/images/* wiki-gh-pages/images; cp -r public/* wiki-gh-pages/"
   },
   "repository": {
