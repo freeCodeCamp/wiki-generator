@@ -1,15 +1,7 @@
 # Scripts for deploying the wiki to gh-pages
 
-## Setup
-1. `./install.sh`
-2. `npm install -g gatsby`
-3. `npm install`
+## Instructions
 
-## To Run Locally
-`./local.sh`.
-This will update your local copy from the main wiki repo, and serve it on `localhost:8000`.
-When satisfied with your changes, run `./print.sh`
-
-## To Update the Gatsby-Wiki Repo
-(hopefully after having 'printed')
-`./deploy.sh`
+1. Install all pacages with `npm install`
+2. Run a local instance with `npm run build`. This will serve it on `localhost:8000`
+3. When satisfied with your changes, do `npm run save-changes` to update the gatsby wiki. This will save the templates and commit changes with the date as the commit message `"Page built on date +"%d-%m-%Y %T"`
