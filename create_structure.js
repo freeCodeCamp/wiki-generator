@@ -48,6 +48,13 @@ fs.readdir('./wiki-master', function(err, files) {
     return /\w{2}\.lang/.test(file);
   });
 
+  // Automatically updates the list of supported languages
+  folderList.forEach(file => {
+    var lang = /(\w{2})\.lang/.exec(file);
+    lang = lang[1]
+    langList.push(lang + '/');
+  })
+
   // Get English/Top Level files
   var fileList = files.filter(function(file) {
     return /\.md$/.test(file) && !/^_|\w{2}\.lang/.test(file);
@@ -82,13 +89,15 @@ fs.readdir('./wiki-master', function(err, files) {
     // Regex to use to find Home.md files in any language.
     var homeRegex = /^(([A-Z]{2}-){0,2})Home\.md$/gm;
     var home = homeRegex.exec(langFiles);
-    home = home[0];
+    if (home != null) {
+      home = home[0];
+      languageFolders.push({
+        inputFile: `./wiki-master/` + langSubFolder + `/` + home,
+        outputFile: `./pages/` + langDir + 'index.md'
+      });
+    }
 
     // Setup copies for later
-    languageFolders.push({
-      inputFile: `./wiki-master/` + langSubFolder + `/` + home,
-      outputFile: `./pages/` + langDir + 'index.md'
-    });
     languageFolders.push({
       inputFile: `./templates/lang/_template.jsx`,
       outputFile: `./pages/` + langDir + '_template.jsx'
@@ -100,7 +109,7 @@ fs.readdir('./wiki-master', function(err, files) {
         return (/\.md$/.test(file) && !/^_|\w{2}\.lang/.test(file));
       }).map(function(file) {
         // Make directories/filenames
-        if (/Home\.md/i.test(file)) {
+        if (homeRegex.test(file)) {
           return {
             isHome: true,
             inputFile: file,
