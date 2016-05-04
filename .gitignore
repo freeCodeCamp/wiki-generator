@@ -6,3 +6,4 @@ pages/*
 docs/*
 .idea/
 *.log
+.gatsby-context.js

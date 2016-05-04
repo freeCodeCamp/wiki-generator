@@ -1,5 +1,7 @@
 var mkdirp = require('mkdirp');
 var fs = require('fs-extra');
+var gracefulFs = require('graceful-fs')
+gracefulFs.gracefulify(fs)
 var through2 = require('through2');
 var incomingLink = /github\.com\/freecodecamp\/freecodecamp\/wiki/gi;
 var outgoingLink = 'freecodecamp.com/wiki';
@@ -112,8 +114,8 @@ fs.readdir('./wiki-master', function(err, files) {
         if (homeRegex.test(file)) {
           return {
             isHome: true,
-            inputFile: file,
-            outputDir: langDir,
+            inputFile: langSubFolder + '/' + file,
+            outputDir: langDir + file,
             lang: lang
           };
         } else {
