@@ -1,7 +1,5 @@
 var mkdirp = require('mkdirp');
 var fs = require('fs-extra');
-var gracefulFs = require('graceful-fs')
-gracefulFs.gracefulify(fs)
 var through2 = require('through2');
 var incomingLink = /github\.com\/freecodecamp\/freecodecamp\/wiki/gi;
 var outgoingLink = 'freecodecamp.com/wiki';
@@ -173,6 +171,15 @@ function createFolders(fileList) {
         // convert buffer to string
         var file = chunk.toString();
         // Dirty hack to remove the first line of home
+        /*
+        Attempt at fixing double links
+        var titleregex = /^#(.*)/;
+        var title = titleregex.exec(file);
+        if (title != null) {
+          title = title[1];
+          fileObj.title = title;
+        }
+        */
         if (fileObj.isHome) {
           file = file.replace(/^#[^\n]+\n/, '');
         }
