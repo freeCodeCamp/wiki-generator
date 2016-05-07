@@ -115,7 +115,7 @@ fs.readdir('./wiki-master', function(err, files) {
           return {
             isHome: true,
             inputFile: langSubFolder + '/' + file,
-            outputDir: langDir + file,
+            outputDir: langDir,
             lang: lang
           };
         } else {
