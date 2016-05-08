@@ -10,3 +10,7 @@
 6. Copy the templates with `npm run copy-templates`
 7. Run a local instance with `npm run start`. This will serve it on `http://0.0.0.0:8000/`
 8. When satisfied with your changes, do `npm run save-pages` to update the gatsby wiki. This will commit changes with the date as the commit message `"Page built on date +"%d-%m-%Y %T"`
+
+## Update Live Wiki
+
+If you just want to update the live wiki without making changes then just follow the steps and **skipt step 7**.
