@@ -5,3 +5,5 @@ wiki-master/*
 pages/*
 docs/*
 .idea/
+*.log
+.gatsby-context.js

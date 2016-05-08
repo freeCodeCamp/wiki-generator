@@ -5,24 +5,19 @@ var incomingLink = /github\.com\/freecodecamp\/freecodecamp\/wiki/gi;
 var outgoingLink = 'freecodecamp.com/wiki';
 
 // Initialize Language folders files to copy
-var languageFolders = [
-  {
-    inputFile: `./wiki-master/Home.md`,
-    outputFile: `./pages/en/index.md`
-  },
-  {
-    inputFile: `./templates/index.md`,
-    outputFile: `./pages/index.md`
-  },
-  {
-    inputFile: `./templates/lang/_template.jsx`,
-    outputFile: `./pages/en/_template.jsx`
-  },
-  {
-    inputFile: `./templates/_template.jsx`,
-    outputFile: `./pages/_template.jsx`
-  }
-];
+var languageFolders = [{
+  inputFile: `./wiki-master/Home.md`,
+  outputFile: `./pages/en/index.md`
+}, {
+  inputFile: `./templates/index.md`,
+  outputFile: `./pages/index.md`
+}, {
+  inputFile: `./templates/lang/_template.jsx`,
+  outputFile: `./pages/en/_template.jsx`
+}, {
+  inputFile: `./templates/_template.jsx`,
+  outputFile: `./pages/_template.jsx`
+}];
 
 // same logic used on the main site to prepare URLs from titles
 // dasherize(str: String) => String
@@ -42,10 +37,10 @@ function unDasherize(str) {
 }
 
 // List of supported languages
-var langList = [ 'en/' ];
+var langList = ['en/'];
 
 // Get File list
-fs.readdir('./wiki-master', function (err, files) {
+fs.readdir('./wiki-master', function(err, files) {
   if (err) throw err;
 
   // List all of the *.lang folders for later
@@ -53,10 +48,17 @@ fs.readdir('./wiki-master', function (err, files) {
     return /\w{2}\.lang/.test(file);
   });
 
+  // Automatically updates the list of supported languages
+  folderList.forEach(file => {
+    var lang = /(\w{2})\.lang/.exec(file);
+    lang = lang[1]
+    langList.push(lang + '/');
+  })
+
   // Get English/Top Level files
-  var fileList = files.filter(function (file) {
+  var fileList = files.filter(function(file) {
     return /\.md$/.test(file) && !/^_|\w{2}\.lang/.test(file);
-  }).map(function (file) {
+  }).map(function(file) {
     // Make directories/filenames
     if (/Home\.md/i.test(file)) {
       return {
@@ -84,11 +86,18 @@ fs.readdir('./wiki-master', function (err, files) {
     // Add this directory to the list of languages
     langList.push(langDir);
 
+    // Regex to use to find Home.md files in any language.
+    var homeRegex = /^(([A-Z]{2}-){0,2})Home\.md$/gm;
+    var home = homeRegex.exec(langFiles);
+    if (home != null) {
+      home = home[0];
+      languageFolders.push({
+        inputFile: `./wiki-master/` + langSubFolder + `/` + home,
+        outputFile: `./pages/` + langDir + 'index.md'
+      });
+    }
+
     // Setup copies for later
-    languageFolders.push({
-      inputFile: `./wiki-master/` + langSubFolder + `/Home.md`,
-      outputFile: `./pages/` + langDir + 'index.md'
-    });
     languageFolders.push({
       inputFile: `./templates/lang/_template.jsx`,
       outputFile: `./pages/` + langDir + '_template.jsx'
@@ -96,14 +105,14 @@ fs.readdir('./wiki-master', function (err, files) {
 
     // Append foreign language files to the copy list
     return thisList.concat(
-      langFiles.filter(function (file) {
+      langFiles.filter(function(file) {
         return (/\.md$/.test(file) && !/^_|\w{2}\.lang/.test(file));
-      }).map(function (file) {
+      }).map(function(file) {
         // Make directories/filenames
-        if (/Home\.md/i.test(file)) {
+        if (homeRegex.test(file)) {
           return {
             isHome: true,
-            inputFile: file,
+            inputFile: langSubFolder + '/' + file,
             outputDir: langDir,
             lang: lang
           };
@@ -133,7 +142,7 @@ fs.readdir('./wiki-master', function (err, files) {
   }
 
   // Generate _pages.yaml for each language
-  langList.forEach( lang => {
+  langList.forEach(lang => {
     var langDir = './pages/' + lang;
 
     var output = fs.readdirSync(langDir).filter(file => {
@@ -145,7 +154,7 @@ fs.readdir('./wiki-master', function (err, files) {
 
     try {
       fs.outputFileSync(langDir + '_pages.yaml', output);
-    } catch(err) {
+    } catch (err) {
       throw err;
     }
   });
@@ -153,7 +162,7 @@ fs.readdir('./wiki-master', function (err, files) {
 
 // Create a folder base
 function createFolders(fileList) {
-  fileList.forEach(function (fileObj) {
+  fileList.forEach(function(fileObj) {
     // Create directory
     fs.mkdirsSync('./pages/' + fileObj.outputDir);
     // read file
@@ -162,20 +171,28 @@ function createFolders(fileList) {
         // convert buffer to string
         var file = chunk.toString();
         // Dirty hack to remove the first line of home
-        if(fileObj.isHome) {
-          file = file.replace(/^#[^\n]+\n/,'');
+        /*
+        Attempt at fixing double links
+        var titleregex = /^#(.*)/;
+        var title = titleregex.exec(file);
+        if (title != null) {
+          title = title[1];
+          fileObj.title = title;
+        }
+        */
+        if (fileObj.isHome) {
+          file = file.replace(/^#[^\n]+\n/, '');
         }
         // replace github wiki links with gatsby links
         file = file
           .replace(incomingLink, outgoingLink + '/' + fileObj.lang)
-          .replace(/\.\/images/gi, '../images');  // Update image links to be relative
+          .replace(/\.\/images/gi, '../images'); // Update image links to be relative
         var order = fileObj.isHome ? 0 : 5;
         var header = `---\ntitle: ${fileObj.title}\norder: ${order}\n---\n`;
         this.push(new Buffer(header + file));
         cb();
       }))
       .pipe(
-        fs.createWriteStream('./pages/' + fileObj.outputDir + '/index.md'
-      ));
+        fs.createWriteStream('./pages/' + fileObj.outputDir + '/index.md'));
   });
 }

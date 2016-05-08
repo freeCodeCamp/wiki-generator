@@ -1,6 +1,8 @@
 [submodule "wiki-master"]
 	path = wiki-master
 	url = git@github.com:FreeCodeCamp/wiki.git
+	branch = master
 [submodule "wiki-gh-pages"]
 	path = wiki-gh-pages
 	url = git@github.com:FreeCodeCamp/wiki.git
+	branch = gh-pages

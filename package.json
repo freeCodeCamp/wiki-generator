@@ -1,15 +1,19 @@
 {
   "name": "wiki-generator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Wiki Pages Generator for Free Code Camp",
   "main": "n/a",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "./node_modules/.bin/eslint --ext .js,.jsx --ignore-pattern public .",
-    "start": "gatsby develop",
-    "build": "npm run init-pages && rm -rf public && NODE_ENV=production gatsby build --prefix-links && npm run copy-assets",
-    "init-pages": "mkdir -p pages/ && rm -rf ./pages/* && node create_structure",
-    "copy-assets": "rm -r wiki-gh-pages/* && mkdir wiki-gh-pages/images/ && cp -r wiki-master/images/* wiki-gh-pages/images; cp -r public/* wiki-gh-pages/"
+    "start": "./node_modules/.bin/gatsby develop",
+    "build": "npm run init-pages && npm run create-struc && ./node_modules/.bin/rimraf public && NODE_ENV=production && ./node_modules/.bin/gatsby build --prefix-links && npm run copy-assets && npm run start",
+    "init-pages": "git submodule init && git submodule update --remote && cd wiki-master && git checkout master && cd ../wiki-gh-pages && git checkout gh-pages && cd ..",
+    "create-struc": "mkdir -p pages/ && ./node_modules/.bin/rimraf ./pages/* && node create_structure",
+    "copy-assets": "./node_modules/.bin/rimraf wiki-gh-pages/* && mkdir wiki-gh-pages/images/ && cp -r wiki-master/images/* wiki-gh-pages/images && cp -r public/* wiki-gh-pages/ && mkdir -p wiki-gh-pages/css && cp -r css/* wiki-gh-pages/css/",
+    "copy-templates": "cp -r ./pages/_template.jsx ./templates/. && cp -r ./pages/en/_template.jsx ./templates/lang/.",
+    "save-pages": "cd wiki-gh-pages/ && git pull origin gh-pages && git add -A && git commit -m 'Page built on `date +\"%d-%m-%Y %T\"`' && git push origin gh-pages && cd ..",
+    "save-changes": "npm run copy-templates && npm run save-pages"
   },
   "repository": {
     "type": "git",
@@ -28,7 +32,7 @@
     "babel-preset-react": "^6.5.0",
     "babel-preset-stage-1": "^6.5.0",
     "extract-text-webpack-plugin": "^1.0.1",
-    "fs-extra": "^0.26.5",
+    "fs-extra": "^0.30.0",
     "gatsby": "https://github.com/BerkeleyTrue/gatsby.git#freecodecamp",
     "lodash": "^4.5.1",
     "mkdirp": "^0.5.1",
@@ -42,6 +46,7 @@
     "react-transform-catch-errors": "^1.0.2",
     "react-transform-hmr": "^1.0.2",
     "redbox-react": "^1.2.2",
+    "rimraf": "^2.5.2",
     "through2": "^2.0.1",
     "underscore.string": "^3.2.2",
     "webpack": "^1.12.14"
