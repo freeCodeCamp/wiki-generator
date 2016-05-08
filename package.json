@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "./node_modules/.bin/eslint --ext .js,.jsx --ignore-pattern public .",
     "start": "./node_modules/.bin/gatsby develop",
-    "build": "NODE_ENV=production && ./node_modules/.bin/gatsby build --prefix-links",
+    "build": "./node_modules/.bin/rimraf public && NODE_ENV=production && ./node_modules/.bin/gatsby build --prefix-links",
     "init-pages": "git submodule init && git submodule update --remote && cd wiki-master && git checkout master && cd ../wiki-gh-pages && git checkout gh-pages && cd ..",
     "create-struc": "mkdir -p pages/ && ./node_modules/.bin/rimraf ./pages/* && node create_structure",
     "copy-assets": "./node_modules/.bin/rimraf wiki-gh-pages/* && mkdir wiki-gh-pages/images/ && cp -r wiki-master/images/* wiki-gh-pages/images && cp -r public/* wiki-gh-pages/ && mkdir -p wiki-gh-pages/css && cp -r css/* wiki-gh-pages/css/",
