@@ -4,7 +4,7 @@ var through2 = require('through2');
 var incomingLink = /(.+\]\()([^http]#{0,1}.+)(\))/g;
 var outgoingLink = 'https://freecodecamp.github.io/wiki/';
 var insideLink = /(\()(\#.+)(\))/g;
-
+var emojione = require('emojione');
 // Initialize Language folders files to copy
 var languageFolders = [{
   inputFile: `./wiki-master/Home.md`,
@@ -185,10 +185,10 @@ function createFolders(fileList) {
           file = file.replace(/^#[^\n]+\n/, '');
         }
         // replace github wiki links with gatsby links
-        file = file
+        file = emojione.toImage(file
           .replace(insideLink, '$1' + fileObj.fileName + '$2$3') // make sure subheading links point to the right place
           .replace(incomingLink, '$1' + outgoingLink + fileObj.lang + '/' + '$2/$3') // Make sure links point to the right domain
-          .replace(/\.\/images/gi, '../images'); // Update image links to be relative
+          .replace(/\.\/images/gi, '../images')); // Update image links to be relative
         var order = fileObj.isHome ? 0 : 5;
         var header = `---\ntitle: ${fileObj.title}\norder: ${order}\n---\n`;
         this.push(new Buffer(header + file));
