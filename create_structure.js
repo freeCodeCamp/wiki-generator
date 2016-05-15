@@ -4,6 +4,7 @@ var through2 = require('through2');
 //var emoji = require('markdown-it-emoji')
 var incomingLink = /github\.com\/freecodecamp\/freecodecamp\/wiki/gi;
 var outgoingLink = 'freecodecamp.com/wiki';
+var badInternalLink = /freecodecamp\.github\.io\/wiki/gi;
 
 // Initialize Language folders files to copy
 var languageFolders = [{
@@ -184,6 +185,7 @@ function createFolders(fileList) {
         // replace github wiki links with gatsby links
         file = file
           .replace(incomingLink, outgoingLink + '/' + fileObj.lang)
+          .replace(badInternalLink, outgoingLink + '/' + fileObj.lang) // Update bad internal linkign to new one
           .replace(/\.\/images/gi, '../images'); // Update image links to be relative
         var order = fileObj.isHome ? 0 : 5;
         var header = `---\ntitle: ${fileObj.title}\norder: ${order}\n---\n`;
