@@ -1,6 +1,7 @@
 var mkdirp = require('mkdirp');
 var fs = require('fs-extra');
 var through2 = require('through2');
+//var emoji = require('markdown-it-emoji')
 var incomingLink = /github\.com\/freecodecamp\/freecodecamp\/wiki/gi;
 var outgoingLink = 'freecodecamp.com/wiki';
 
@@ -170,17 +171,14 @@ function createFolders(fileList) {
       .pipe(through2.obj(function(chunk, enc, cb) {
         // convert buffer to string
         var file = chunk.toString();
-        // Dirty hack to remove the first line of home
-        /*
-        Attempt at fixing double links
-        var titleregex = /^#(.*)/;
-        var title = titleregex.exec(file);
-        if (title != null) {
-          title = title[1];
-          fileObj.title = title;
-        }
-        */
-        if (fileObj.isHome) {
+        // Uses file's titles and prevents double titles
+        var titleregex = /^(#(?!#))\s?((?:.(?!\\n))*)/;
+        var fileTitle = titleregex.exec(file);
+        if (fileTitle != null) {
+          fileTitle = fileTitle[2];
+          fileTitle = titulo.replace(/:/g, '');
+          fileObj.title = fileTitle;
+          // Dirty hack to remove the title
           file = file.replace(/^#[^\n]+\n/, '');
         }
         // replace github wiki links with gatsby links
