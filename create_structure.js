@@ -176,7 +176,7 @@ function createFolders(fileList) {
         var fileTitle = titleregex.exec(file);
         if (fileTitle != null) {
           fileTitle = fileTitle[2];
-          fileTitle = titulo.replace(/:/g, '');
+          fileTitle = fileTitle.replace(/:/g, '');
           fileObj.title = fileTitle;
           // Dirty hack to remove the title
           file = file.replace(/^#[^\n]+\n/, '');
