@@ -12,7 +12,8 @@
     "create-struc": "mkdir -p pages/ && ./node_modules/.bin/rimraf ./pages/* && node create_structure",
     "copy-assets": "./node_modules/.bin/rimraf wiki-gh-pages/* && mkdir wiki-gh-pages/images/ && cp -r wiki-master/images/* wiki-gh-pages/images && cp -r public/* wiki-gh-pages/ && mkdir -p wiki-gh-pages/css && cp -r css/* wiki-gh-pages/css/",
     "copy-templates": "cp -r ./pages/_template.jsx ./templates/. && cp -r ./pages/en/_template.jsx ./templates/lang/.",
-    "save-pages": "cd wiki-gh-pages/ && git add -A && git commit -m 'Page built on `date +\"%d-%m-%Y %T\"`' && git push origin gh-pages && cd .."
+    "save-pages": "cd wiki-gh-pages/ && git add -A && git commit -m 'Page built on `date +\"%d-%m-%Y %T\"`' && git push origin gh-pages && cd ..",
+    "just-deploy": "npm run init-pages && npm run create-struc && npm run build && npm run copy-assets && npm run copy-templates && npm run save-pages"
   },
   "repository": {
     "type": "git",
