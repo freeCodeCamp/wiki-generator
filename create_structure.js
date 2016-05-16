@@ -1,8 +1,9 @@
 var mkdirp = require('mkdirp');
 var fs = require('fs-extra');
 var through2 = require('through2');
-var incomingLink = /(.+\]\()([^http].+)(\))/g;
+var incomingLink = /(.+\]\()([^http]#{0,1}.+)(\))/g;
 var outgoingLink = 'https://freecodecamp.github.io/wiki/';
+var insideLink = /(\()(\#.+)(\))/g;
 
 // Initialize Language folders files to copy
 var languageFolders = [{
@@ -65,14 +66,16 @@ fs.readdir('./wiki-master', function(err, files) {
         outputDir: 'en/',
         isHome: true,
         title: 'Welcome to the Free Code Camp Wiki',
-        lang: 'en'
+        lang: 'en',
+        fileName: file.replace(/(\.md)/,'')
       };
     }
     return {
       inputFile: file,
       outputDir: 'en/' + dasherize(file),
       title: unDasherize(file),
-      lang: 'en'
+      lang: 'en',
+      fileName: file.replace(/(\.md)/,'')
     };
   });
 
@@ -113,14 +116,16 @@ fs.readdir('./wiki-master', function(err, files) {
             isHome: true,
             inputFile: langSubFolder + '/' + file,
             outputDir: langDir,
-            lang: lang
+            lang: lang,
+            fileName: file.replace(/(\.md)/,'')
           };
         } else {
           return {
             inputFile: langSubFolder + '/' + file,
             outputDir: langDir + dasherize(file),
             title: unDasherize(file),
-            lang: lang
+            lang: lang,
+            fileName: file.replace(/(\.md)/,'')
           };
         }
       })
@@ -181,8 +186,8 @@ function createFolders(fileList) {
         }
         // replace github wiki links with gatsby links
         file = file
-          .replace(incomingLink, '$1' + outgoingLink + fileObj.lang + '/' + '$2/$3')
-          //.replace(badInternalLink, outgoingLink + '$1$2$3') // Update bad internal linkign to new one
+          .replace(insideLink, '$1' + fileObj.fileName + '$2$3') // make sure subheading links point to the right place
+          .replace(incomingLink, '$1' + outgoingLink + fileObj.lang + '/' + '$2/$3') // Make sure links point to the right domain
           .replace(/\.\/images/gi, '../images'); // Update image links to be relative
         var order = fileObj.isHome ? 0 : 5;
         var header = `---\ntitle: ${fileObj.title}\norder: ${order}\n---\n`;
