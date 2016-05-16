@@ -10,6 +10,8 @@
 
 ## Instructions
 
+These are the manual instructions. If you are having erros along the way, these series of comamnds will make it easier to debug.
+
 1. Install all pacages with `npm install`
 2. Initialize and update the submodules `npm run init-pages`
 3. Clean and create the structure for the pages with `npm run create-struc`
@@ -17,8 +19,12 @@
 5. Then copy the assets with `npm run copy-assets`
 6. Copy the templates with `npm run copy-templates`
 7. Run a local instance with `npm run start`. This will serve it on `http://0.0.0.0:8000/`
-8. When satisfied with your changes, do `npm run save-pages` to update the gatsby wiki. This will commit changes with the date as the commit message `"Page built on date +"%d-%m-%Y %T"`
+8. When satisfied with your changes, stop the script with `ctrl` + `c` and do `npm run save-pages` to update the gatsby wiki. This will commit changes with the date as the commit message `"Page built on date +"%d-%m-%Y %T"`
 
 ## Update Live Wiki
 
 If you just want to deploy without previwing first then run `npm run just-deploy`.
+
+## Directly build and preview
+
+If you already made your changes and just want to quickly build and start the previw on the browser then run `npm run preview`, this will not deploy automatically, you will need to run `npm run save-page`.
