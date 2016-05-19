@@ -1,10 +1,11 @@
 var mkdirp = require('mkdirp');
 var fs = require('fs-extra');
 var through2 = require('through2');
+var emojione = require('emojione');
 var incomingLink = /(.+\]\()([^http]#{0,1}.+)(\))/g;
 var outgoingLink = 'https://freecodecamp.github.io/wiki/';
 var insideLink = /(\()(\#.+)(\))/g;
-var emojione = require('emojione');
+
 // Initialize Language folders files to copy
 var languageFolders = [{
   inputFile: `./wiki-master/Home.md`,
