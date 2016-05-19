@@ -9,7 +9,7 @@ body,html {
   width: 100%; 
 }
 .wiki-container {
-  max-width:960px;
+  max-width:100%;
   padding:80px 30px 0;
   box-sizing: border-box;
   display: inline-block;
@@ -69,6 +69,7 @@ a:hover {
 .searchBar {
   margin-top:10px;
   margin-bottom:25px;
+  width: 100%;
 }
 .articlesList ul {
   list-style: none;
@@ -110,4 +111,9 @@ a:hover {
 
 .emojione {
   width: 1em;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
 }
