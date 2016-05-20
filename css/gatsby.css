@@ -7,9 +7,9 @@ body, html {
   display: block;
   height: 100%;
   width: 100%;
+  left: 0;
 }
 .wiki-container {
-  max-width: 100%;
   padding: 80px 0 0;
   box-sizing: border-box;
   display: inline-block;
@@ -63,18 +63,27 @@ a:hover {
 .wiki-aside {
   width: 80%;
   margin: 0 auto;
+  border-style: solid;
+  border-color: darkgreen;
+  border-radius: 5px;
+  padding: 15px 15px 0 15px;
 }
 .searchBar {
-  width: 100%;
+  width: auto;
+  padding: 5px;
+  background-color: lightgray;
+  font-size: 20px;
+  color: darkgreen;
+  border-color: lightgray;
+  border-style: solid;
 }
 .articlesList ul {
   list-style: none;
-  padding-left: 0;
+  padding-left: 15px;
   max-height: 10vh;
   overflow-y: scroll;
   text-transform: capitalize;
-  width: 100%;
-  margin: 0 auto;
+  width: auto;
 }
 .emojione {
   width: 1em;
@@ -93,12 +102,30 @@ img {
 h1:first-of-type {
   text-align: center;
 }
+input.searchBar {
+  width: 97%;
+  border-color: lightgray;
+}
+::-webkit-input-placeholder {
+  /* WebKit, Blink, Edge */
+  color: darkgreen;
+}
+:-moz-placeholder {
+  /* Mozilla Firefox 4 to 18 */
+  color: darkgreen;
+  opacity: 1;
+}
+::-moz-placeholder {
+  /* Mozilla Firefox 19+ */
+  color: darkgreen;
+  opacity: 1;
+}
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: darkgreen;
+}
 @media (max-width:480px) {
   .articlesList ul {
-    list-style: none;
-    margin-left: 0;
     max-height: 20vh;
-    overflow-y: scroll;
-    text-transform: capitalize;
   }
 }
