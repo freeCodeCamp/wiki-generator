@@ -87,7 +87,11 @@ img {
   display: none;
 }
 .markdown {
-  padding-left: 10px;
+  margin-right: 5%;
+  margin-left: 5%;
+}
+h1:first-of-type {
+  text-align: center;
 }
 @media (max-width:480px) {
   .articlesList ul {
