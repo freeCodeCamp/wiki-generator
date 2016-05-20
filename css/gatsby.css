@@ -1,113 +1,100 @@
-body,html {
-  overflow:hidden;
+body, html {
+  overflow: hidden;
 }
 #react-mount {
   font-family: 'Lato', sans-serif;
   position: absolute;
   display: block;
   height: 100%;
-  width: 100%; 
+  width: 100%;
 }
 .wiki-container {
-  max-width:960px;
-  padding:80px 30px 0;
+  max-width: 100%;
+  padding: 80px 0 0;
   box-sizing: border-box;
   display: inline-block;
   width: 100%;
   height: 100%;
-  margin:0 auto;
-  position:relative;
+  margin: 0 auto;
+  position: relative;
   overflow-x: hidden;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 }
-a{
+a {
   text-decoration: none;
-  color:#006400;
+  color: #006400;
 }
 a:hover {
   text-decoration: underline;
 }
 .wiki-header {
-  z-index:999;
-  position:fixed;
-  top:0;
-  width:100%;
-  height:80px;
-  background:#fff;
+  z-index: 999;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 80px;
+  background: #fff;
 }
 .wiki-header a {
-  color:#fff;
+  color: #fff;
 }
 .wiki-header a:hover {
-  color:#006400;
+  color: #006400;
 }
 .wiki-header img {
-  margin-top:30px;
-  width:270px;
+  margin-top: 30px;
+  width: 270px;
 }
 .wiki-header span {
-  position:absolute;
+  position: absolute;
 }
 .article-content {
-  width:95%;
-  margin:40px auto 0;
+  width: 95%;
+  margin: 40px auto 0;
 }
 .wiki-selector {
-  position:fixed;
-  top:50px;
+  position: fixed;
+  top: 50px;
 }
 .wiki-selector select {
-  width:95%;
+  width: 95%;
 }
 .wiki-aside {
-  width: 250px;
-  border-left: 1px solid lightgrey;
-  float:right;
-  padding-left:20px;
+  width: 80%;
+  margin: 0 auto;
 }
 .searchBar {
-  margin-top:10px;
-  margin-bottom:25px;
+  width: 100%;
 }
 .articlesList ul {
   list-style: none;
-  margin-left: 0;
-  height:82vh;
+  padding-left: 0;
+  max-height: 10vh;
   overflow-y: scroll;
   text-transform: capitalize;
+  width: 100%;
+  margin: 0 auto;
 }
-
-@media (max-width:700px) {
-  .wiki-aside {
-    display: none;
-  }
-  .wiki-header, .wiki-selector {
-    text-align:center;
-  }
-  .wiki-header span {
-    left:50%;
-    top:60px;
-    transform: translateX(-50%);
-  }
-}
-@media (min-width:701px) {
-  .wiki-selector {
-    display: none;
-  }
-  .wiki-header span {
-    margin-left:10px;
-    top:40px;
-  }
-  .articleContent {
-    width:auto;
-    padding-right:30px;
-    height:88vh;
-    overflow-y: scroll;
-    margin-top:0;
-  }
-}
-
 .emojione {
   width: 1em;
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
+.wiki-selector {
+  display: none;
+}
+.markdown {
+  padding-left: 10px;
+}
+@media (max-width:480px) {
+  .articlesList ul {
+    list-style: none;
+    margin-left: 0;
+    max-height: 20vh;
+    overflow-y: scroll;
+    text-transform: capitalize;
+  }
 }
