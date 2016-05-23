@@ -2,10 +2,13 @@ var mkdirp = require('mkdirp');
 var fs = require('fs-extra');
 var through2 = require('through2');
 var emojione = require('emojione');
+
+// Regex variables
 var incomingLink = /(.+\]\()([^http]#{0,1}.+)(\))/g;
 var outgoingLink = 'https://www.freecodecamp.com/wiki/';
 var insideLink = /(\()(\#.+)(\))/g;
 var titleregex = /^(#(?!#))\s?((?:.(?!\\n))*)/;
+var externalLinks = /([^\!])\[(.*)\]\((http.+|www.+)\)/gi;
 
 // Initialize Language folders files to copy
 var languageFolders = [{
@@ -70,7 +73,7 @@ fs.readdir('./wiki-master', function(err, files) {
         isHome: true,
         title: 'Welcome to the Free Code Camp Wiki',
         lang: 'en',
-        fileName: file.replace(/(\.md)/,'')
+        fileName: file.replace(/(\.md)/, '')
       };
     }
     return {
@@ -78,7 +81,7 @@ fs.readdir('./wiki-master', function(err, files) {
       outputDir: 'en/' + dasherize(file),
       title: unDasherize(file),
       lang: 'en',
-      fileName: file.replace(/(\.md)/,'')
+      fileName: file.replace(/(\.md)/, '')
     };
   });
 
@@ -120,7 +123,7 @@ fs.readdir('./wiki-master', function(err, files) {
             inputFile: langSubFolder + '/' + file,
             outputDir: langDir,
             lang: lang,
-            fileName: file.replace(/(\.md)/,'')
+            fileName: file.replace(/(\.md)/, '')
           };
         } else {
           return {
@@ -128,7 +131,7 @@ fs.readdir('./wiki-master', function(err, files) {
             outputDir: langDir + dasherize(file),
             title: unDasherize(file),
             lang: lang,
-            fileName: file.replace(/(\.md)/,'')
+            fileName: file.replace(/(\.md)/, '')
           };
         }
       })
@@ -220,14 +223,14 @@ function createFolders(fileList) {
       .pipe(through2.obj(function(chunk, enc, cb) {
         // convert buffer to string
         var file = chunk.toString();
-        
+
         fileObj.title = setTitle(file, fileObj.title);
         file = removeH1(file);
         file = replIntraLink(file, fileObj);
         file = replInternalLink(file, fileObj);
         file = imgLinks(file);
         file = useEmoji(file);
-        
+
         var order = fileObj.isHome ? 0 : 5;
         var header = `---\ntitle: ${fileObj.title}\norder: ${order}\n---\n`;
         this.push(new Buffer(header + file));

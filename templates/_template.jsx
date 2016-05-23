@@ -26,6 +26,16 @@ module.exports = React.createClass({
     browserHistory.listen(location => {
       parent.postMessage(location.pathname, originUrl);
     });
+    
+    // Make external links open in a new tab
+    var links = document.links;
+    var domain = /freecodecamp\.com/;
+    for (var i = 0, linksLength = links.length; i < linksLength; i++) {
+       if (!domain.test(links[i].hostname)) {
+           links[i].target = '_blank';
+       };
+    };
+
   },
   render: function() {
     return (
