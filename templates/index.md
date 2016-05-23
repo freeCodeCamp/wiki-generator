@@ -3,18 +3,35 @@ title: "Welcome to the Free Code Camp Wiki!"
 ---
 
 Our open source community's Wiki focuses on answering your questions about learning to code and getting a coding job. We also cover in detail our:
+
 - Curriculum
-- Local Campsite Communities
+- Local Group Communities
 - Nonprofit Projects
 
-![An illustration of CamperBot](http://i.imgur.com/gyJwzkx.png)
+![An illustration of CamperBot](https://i.imgur.com/gyJwzkx.png)
 
-The best way to access this wiki is via [CamperBot](http://beta.freecodecamp.com/wiki/docs/camperbot), located in our Gitter channels. CamperBot is a community designed tool useful for accessing our wiki content without ever leaving Gitter.
+The best way to access this wiki is via [CamperBot](CamperBot), located in our Gitter channels. CamperBot is a community designed tool useful for accessing our wiki content without ever leaving Gitter.
 
-To contribute a wiki article for any of the bonfires, please use this [template](http://beta.freecodecamp.com/wiki/docs/Bonfire-Wiki-Template). This is essential for [@CamperBot](https://github.com/camperbot) to retrieve the article. Bonfire articles that do not use this template will be removed.
+## Contributing to the Wiki
 
-You will then need to clone the [wiki](http://beta.freecodecamp.com/wiki/docs) and create a branch where you will make your changes and submmit a pull request to be merged before the changes goes live on the wiki. This is to filter any spam content or damage to **our** wiki.
+To contribute a wiki article for any of the Algorithms, please use this [template](Algorithm-Wiki-Template). This is essential for [@CamperBot](https://github.com/camperbot) to retrieve the article. Algorithm articles that do not use this template will be removed. Please note that while we will publish solutions that can help others, we don't need many of them and a maximum of three solutions will be accepted in the following categories:
 
-If you have questions about contributing to the Free Code Camp Wiki message [@Rafase282 in Gitter](https://gitter.im/Rafase282).
+- Basic
+- Intermediate
+- Advance
+
+One code solution per category. If we already have enough solutions and yours is similar to one we already have but you strongly feel like yours will bring something important then we encourage you to merge your solution with the similar one we already have and expand or write a detailed explanation of the code.
+
+If you want to contribute but have no idea what you would like to contribute then feel free to check the open issues we have with request for articles or fixes to them [here.](https://github.com/FreeCodeCamp/wiki/issues)
+
+We welcome **any technology related articles**, not just JavaScript related or Curriculum specific. However, we do ask that you write them in third person instead of first person perspective. We also welcome articles in **other languages**, and welcome **translations** of current articles.
+
+If we merge your pull request, your name will be automatically added to the document history on GitHub, and the repo's contributors. Please don't add additional bylines when creating or editing an article.
+
+### Guides on how to Contribute
+
+They are all located on our [Wiki Central](Wiki-Central) Page. Please take a look before anything else.
+
+If you have questions about contributing to the Free Code Camp Wiki message [@Rafase282 in Gitter](https://gitter.im/Rafase282) or come the [Gitter Wiki Room.](https://gitter.im/FreeCodeCamp/Wiki)
 
 We look forward to collaborating with you on expanding and improving this wiki!
