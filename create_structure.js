@@ -26,6 +26,7 @@ var languageFolders = [{
 // dasherize(str: String) => String
 function dasherize(str) {
   return ('' + str)
+    .toLowerCase()
     .replace(/\s/g, '-')
     .replace('.md', '')
     .replace(/[^a-z0-9\-\.]/gi, '');
@@ -174,14 +175,15 @@ function useEmoji(file) {
 // Changes links pointing to part of articles
 function replIntraLink(file, fileObj) {
   return file
-    .replace(insideLink, '$1' + fileObj.fileName + '$2$3');
+    .replace(insideLink, '$1' + fileObj.fileName.toLowerCase() + '$2$3');
 };
 
 // Changes links pointing to articles
 function replInternalLink(file, fileObj) {
   return file
     .replace(incomingLink, function(match, p1, p2, p3) {
-      return p1 + outgoingLink + fileObj.lang + '/' + p2 + '/' + p3;
+      var lp2 = p2.toLowerCase();
+      return p1 + outgoingLink + fileObj.lang + '/' + lp2 + '/' + p3;
     });
 };
 
