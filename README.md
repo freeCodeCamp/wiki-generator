@@ -2,15 +2,15 @@
 
 ## Requirement
 
-- Currently the generator has only been tested to **work** on a 64 bits machine ruinng **Ubuntu 16.04**.
-- A maching runing **OSX** should also **work** as any other linux machine.
-- **Windows** is currently **not supported**. If you want to bring support for it, you are welcome to submit a pull request for it.
-- You wil have to set **SSL** for your github account.
+- Currently the generator has only been tested to **work** on a 64 bit machines running **Ubuntu 16.04**.
+- A machine running **OSX** should also **work** as will any other linux machine.
+- **Windows** is currently **not supported**. If you want to bring support for Windows, you are welcome to submit a pull request for it.
+- You will have to set **SSL** for your github account.
 - You need to have **write access** to the [**Wiki**](https://github.com/FreeCodeCamp/wiki) repository, otherwise you will not be able to deploy, only build.
 
 ## Instructions
 
-These are the manual instructions. If you are having erros along the way, these series of comamnds will make it easier to debug.
+These are the manual instructions. If you are having errors along the way, these series of comamnds will make it easier to debug.
 
 1. Install all pacages with `npm install`
 2. Initialize and update the submodules `npm run init-pages`
@@ -23,8 +23,8 @@ These are the manual instructions. If you are having erros along the way, these 
 
 ## Update Live Wiki
 
-If you just want to deploy without previwing first then run `npm run just-deploy`.
+If you just want to deploy without previewing first then run `npm run just-deploy`.
 
 ## Directly build and preview
 
-If you already made your changes and just want to quickly build and start the previw on the browser then run `npm run preview`, this will not deploy automatically, you will need to run `npm run save-page`.
+If you already made your changes and just want to quickly build and start the preview on the browser then run `npm run preview`, this will not deploy automatically, you will need to run `npm run save-page`.
