@@ -3,8 +3,9 @@ var fs = require('fs-extra');
 var through2 = require('through2');
 var emojione = require('emojione');
 var incomingLink = /(.+\]\()([^http]#{0,1}.+)(\))/g;
-var outgoingLink = 'https://freecodecamp.github.io/wiki/';
+var outgoingLink = 'https://www.freecodecamp.com/wiki/';
 var insideLink = /(\()(\#.+)(\))/g;
+var titleregex = /^(#(?!#))\s?((?:.(?!\\n))*)/;
 
 // Initialize Language folders files to copy
 var languageFolders = [{
@@ -165,6 +166,48 @@ fs.readdir('./wiki-master', function(err, files) {
   });
 });
 
+// Turns on emoji support
+function useEmoji(file) {
+  return emojione.toImage(file);
+};
+
+// Changes links pointing to part of articles
+function replIntraLink(file, fileObj) {
+  return file
+    .replace(insideLink, '$1' + fileObj.fileName + '$2$3');
+};
+
+// Changes links pointing to articles
+function replInternalLink(file, fileObj) {
+  return file
+    .replace(incomingLink, function(match, p1, p2, p3) {
+      return p1 + outgoingLink + fileObj.lang + '/' + p2 + '/' + p3;
+    });
+};
+
+// Update image links to be relative
+function imgLinks(file) {
+  return file
+    .replace(/\.\/images/gi, '../images');
+};
+
+// Removes the given title given in the markdown
+function removeH1(file) {
+  return file.replace(/^#[^\n]+\n/, '');
+};
+
+// Sets title to be used for the article
+function setTitle(file, title) {
+  var fileTitle = titleregex.exec(file);
+  if (fileTitle != null) {
+    fileTitle = fileTitle[2];
+    fileTitle = fileTitle.replace(/:/g, '');
+    return fileTitle;
+  } else {
+    return title;
+  }
+};
+
 // Create a folder base
 function createFolders(fileList) {
   fileList.forEach(function(fileObj) {
@@ -175,21 +218,14 @@ function createFolders(fileList) {
       .pipe(through2.obj(function(chunk, enc, cb) {
         // convert buffer to string
         var file = chunk.toString();
-        // Uses file's titles and prevents double titles
-        var titleregex = /^(#(?!#))\s?((?:.(?!\\n))*)/;
-        var fileTitle = titleregex.exec(file);
-        if (fileTitle != null) {
-          fileTitle = fileTitle[2];
-          fileTitle = fileTitle.replace(/:/g, '');
-          fileObj.title = fileTitle;
-          // Dirty hack to remove the title
-          file = file.replace(/^#[^\n]+\n/, '');
-        }
-        // replace github wiki links with gatsby links
-        file = emojione.toImage(file
-          .replace(insideLink, '$1' + fileObj.fileName + '$2$3') // make sure subheading links point to the right place
-          .replace(incomingLink, '$1' + outgoingLink + fileObj.lang + '/' + '$2/$3') // Make sure links point to the right domain
-          .replace(/\.\/images/gi, '../images')); // Update image links to be relative
+        
+        fileObj.title = setTitle(file, fileObj.title);
+        file = removeH1(file);
+        file = replIntraLink(file, fileObj);
+        file = replInternalLink(file, fileObj);
+        file = imgLinks(file);
+        file = useEmoji(file);
+        
         var order = fileObj.isHome ? 0 : 5;
         var header = `---\ntitle: ${fileObj.title}\norder: ${order}\n---\n`;
         this.push(new Buffer(header + file));
