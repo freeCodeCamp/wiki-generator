@@ -62,6 +62,7 @@ module.exports = React.createClass({
             <ul>
               {this.renderList(childPages)}
             </ul>
+            <div className='fadeout'></div>
           </div>
         </div>
         <div className='wiki-selector'>
