@@ -57,7 +57,7 @@ fs.readdir('./wiki-master', function(err, files) {
   // Automatically updates the list of supported languages
   folderList.forEach(file => {
     var lang = /(\w{2})\.lang/.exec(file);
-    lang = lang[1]
+    lang = lang[1];
     langList.push(lang + '/');
   })
 
@@ -176,17 +176,17 @@ function useEmoji(file) {
 };
 
 // Changes links pointing to part of articles
-function replIntraLink(file, fileObj) {
+function replIntraLink(file, name) {
   return file
-    .replace(insideLink, '$1' + fileObj.fileName.toLowerCase() + '$2$3');
+    .replace(insideLink, '$1' + name.toLowerCase() + '$2$3');
 };
 
 // Changes links pointing to articles
-function replInternalLink(file, fileObj) {
+function replInternalLink(file, language) {
   return file
     .replace(incomingLink, function(match, p1, p2, p3) {
       var lp2 = p2.toLowerCase();
-      return p1 + outgoingLink + fileObj.lang + '/' + lp2 + '/' + p3;
+      return p1 + outgoingLink + language + '/' + lp2 + '/' + p3;
     });
 };
 
@@ -226,8 +226,8 @@ function createFolders(fileList) {
 
         fileObj.title = setTitle(file, fileObj.title);
         file = removeH1(file);
-        file = replIntraLink(file, fileObj);
-        file = replInternalLink(file, fileObj);
+        file = replIntraLink(file, fileObj.fileName);
+        file = replInternalLink(file, fileObj.lang);
         file = imgLinks(file);
         file = useEmoji(file);
 
