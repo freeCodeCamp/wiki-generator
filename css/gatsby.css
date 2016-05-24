@@ -80,7 +80,7 @@ a:hover {
 .articlesList ul {
   list-style: none;
   padding-left: 15px;
-  max-height: 10vh;
+  height: 11em;
   overflow-y: scroll;
   text-transform: capitalize;
   width: auto;
@@ -109,33 +109,18 @@ input.searchBar {
 }
 .articlesList {
   overflow: hidden;
-  margin-bottom: -4%;
+  margin-bottom: -2em;
 }
 .fadeout {
-  position: relative; 
-  bottom: 4em;
-  height: 4em;
-  background: -webkit-linear-gradient(
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 1) 100%
-  ); 
-  background-image: -moz-linear-gradient(
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 1) 100%
-  );
-  background-image: -o-linear-gradient(
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 1) 100%
-  );
-  background-image: linear-gradient(
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 1) 100%
-  );
-  background-image: -ms-linear-gradient(
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 1) 100%
-  );
-} 
+  position: relative;
+  bottom: 2.5em;
+  height: 1.5em;
+  background: -webkit-linear-gradient( rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+  background-image: -moz-linear-gradient( rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+  background-image: -o-linear-gradient( rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+  background-image: linear-gradient( rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+  background-image: -ms-linear-gradient( rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+}
 ::-webkit-input-placeholder {
   /* WebKit, Blink, Edge */
   color: darkgreen;
@@ -153,9 +138,4 @@ input.searchBar {
 :-ms-input-placeholder {
   /* Internet Explorer 10-11 */
   color: darkgreen;
-}
-@media (max-width:480px) {
-  .articlesList ul {
-    max-height: 20vh;
-  }
 }
