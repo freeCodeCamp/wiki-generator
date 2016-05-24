@@ -13,9 +13,6 @@ module.exports = React.createClass({
   contextTypes: {
     router: React.PropTypes.object.isRequired
   },
-  handleTopicChange(e) {
-    return this.context.router.push(e.target.value)
-  },
   getInitialState() {
     return {filterText: ''};
   },
@@ -43,11 +40,6 @@ module.exports = React.createClass({
       );
     });
   },
-  renderSelector(pages) {
-    return pages.map(child => <option key={prefixLink(child.path)} value={prefixLink(child.path)}>
-      {child.title}
-    </option>);
-  },
   render() {
     const childPages = pageList.map((p) => {
       return find(this.props.route.pages, (_p) => _p.path === p)
@@ -64,11 +56,6 @@ module.exports = React.createClass({
             </ul>
             <div className='fadeout'></div>
           </div>
-        </div>
-        <div className='wiki-selector'>
-          <select defaultValue={this.props.location.pathname} onChange={this.handleTopicChange}>
-            {this.renderSelector(childPages)}
-          </select>
         </div>
         <div className='articleContent'>
           {this.props.children}
