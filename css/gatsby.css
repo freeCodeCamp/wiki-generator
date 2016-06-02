@@ -107,6 +107,10 @@ input.searchBar {
   width: 97%;
   border-color: lightgray;
 }
+input.searchBar:focus {
+  border-color: transparent;
+  outline: 0 none;
+}
 .articlesList {
   overflow: hidden;
   margin-bottom: -2em;
@@ -115,6 +119,7 @@ input.searchBar {
   position: relative;
   bottom: 2.5em;
   height: 1.5em;
+  pointer-events: none;
   background: -webkit-linear-gradient( rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
   background-image: -moz-linear-gradient( rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
   background-image: -o-linear-gradient( rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
