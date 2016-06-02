@@ -170,49 +170,6 @@ fs.readdir('./wiki-master', function(err, files) {
   });
 });
 
-// Turns on emoji support
-function useEmoji(file) {
-  return emojione.toImage(file);
-};
-
-// Changes links pointing to part of articles
-function replIntraLink(file, name) {
-  return file
-    .replace(insideLink, '$1' + name.toLowerCase() + '$2$3');
-};
-
-// Changes links pointing to articles
-function replInternalLink(file, language) {
-  return file
-    .replace(incomingLink, function(match, p1, p2, p3) {
-      var lp2 = p2.toLowerCase();
-      return p1 + outgoingLink + language + '/' + lp2 + '/' + p3;
-    });
-};
-
-// Update image links to be relative
-function imgLinks(file) {
-  return file
-    .replace(/\.\/images/gi, '../images');
-};
-
-// Removes the given title given in the markdown
-function removeH1(file) {
-  return file.replace(/^#[^\n]+\n/, '');
-};
-
-// Sets title to be used for the article
-function setTitle(file, title) {
-  var fileTitle = titleregex.exec(file);
-  if (fileTitle != null) {
-    fileTitle = fileTitle[2];
-    fileTitle = fileTitle.replace(/:/g, '');
-    return fileTitle;
-  } else {
-    return title;
-  }
-};
-
 // Create a folder base
 function createFolders(fileList) {
   fileList.forEach(function(fileObj) {
@@ -223,13 +180,23 @@ function createFolders(fileList) {
       .pipe(through2.obj(function(chunk, enc, cb) {
         // convert buffer to string
         var file = chunk.toString();
-
-        fileObj.title = setTitle(file, fileObj.title);
-        file = removeH1(file);
-        file = replIntraLink(file, fileObj.fileName);
-        file = replInternalLink(file, fileObj.lang);
-        file = imgLinks(file);
-        file = useEmoji(file);
+        // Search for h1 and use them as the article's title
+        var fileTitle = titleregex.exec(file);
+        if (fileTitle != null) {
+          fileTitle = fileTitle[2];
+          fileTitle = fileTitle.replace(/:/g, '');
+          fileObj.title = fileTitle;
+          // Removes found h1 after it has been used.
+          file = file.replace(/^#[^\n]+\n/, '');
+        }
+        // Adds emoji, makes relative links into absolute ones.
+        file = emojione.toImage(file
+          .replace(insideLink, '$1' + fileObj.fileName.toLowerCase() + '$2$3')
+          .replace(incomingLink, function(match, p1, p2, p3) {
+            var lp2 = p2.toLowerCase();
+            return p1 + outgoingLink + fileObj.lang + '/' + lp2 + '/' + p3;
+          })
+          .replace(/\.\/images/gi, '../images'));
 
         var order = fileObj.isHome ? 0 : 5;
         var header = `---\ntitle: ${fileObj.title}\norder: ${order}\n---\n`;
