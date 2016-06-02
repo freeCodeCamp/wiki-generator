@@ -88,7 +88,7 @@ a:hover {
   margin-right: -300px;
 }
 .articlesList ul:empty:before {
-  content:"Not match found";
+  content: 'No match found';
   font-weight: bold;
   font-size: 2em;
 }
