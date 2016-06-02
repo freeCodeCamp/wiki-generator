@@ -185,7 +185,7 @@ function createFolders(fileList) {
         if (fileTitle != null) {
           fileTitle = fileTitle[2];
           fileTitle = fileTitle.replace(/:/g, '');
-          fileObj.title fileTitle;
+          fileObj.title = fileTitle;
           // Removes found h1 after it has been used.
           file = file.replace(/^#[^\n]+\n/, '');
         }
