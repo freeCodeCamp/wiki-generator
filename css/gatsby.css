@@ -87,6 +87,11 @@ a:hover {
   padding-right: 300px;
   margin-right: -300px;
 }
+.articlesList ul:empty:before {
+  content:"Not match found";
+  font-weight: bold;
+  font-size: 2em;
+}
 .emojione {
   width: 1em;
 }
