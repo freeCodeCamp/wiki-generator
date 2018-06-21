@@ -1,5 +1,7 @@
 # Project Status
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/freeCodeCamp/wiki-generator.svg)](https://greenkeeper.io/)
+
 The project has ended as we have moved our wiki to the forum, there are some outstanding issues, if you would like to fix them and continue to use the codebase, feel free to do so and submit your pull request with the changes.
 
 ## Scripts for deploying the wiki to `gh-pages`
